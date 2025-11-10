@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Results - MediAssist AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="results-body">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-results-gradient fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-stethoscope me-2 stethoscope-float"></i>MediAssist AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="patient.html">
+                            <i class="fas fa-user-injured me-1"></i>Patient Portal
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="doctor.html">
+                            <i class="fas fa-user-md me-1"></i>Doctor Portal
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="results.html">
+                            <i class="fas fa-clipboard-check me-1"></i>My Results
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- User Info Bar (Hidden by default) -->
+                <div id="userInfoBar" class="d-none">
+                    <span class="navbar-text me-3">
+                        <i class="fas fa-user me-1"></i>
+                        <span id="userName"></span> (<span id="userTypeDisplay"></span>)
+                    </span>
+                    <button class="btn btn-outline-light btn-sm" onclick="logout()">
+                        <i class="fas fa-sign-out-alt me-1"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Results Hero Section -->
+    <section class="results-hero">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-12 text-center">
+                    <div class="results-header">
+                        <div class="results-icon healthcare-pulse">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h1 class="display-4 fw-bold text-white mb-4">
+                            <i class="fas fa-stethoscope me-2 stethoscope-float"></i>
+                            My Health Results
+                        </h1>
+                        <p class="lead text-white-50 mb-5">View and manage all your medical submissions and AI analysis results</p>
+                        
+                        <!-- Results Summary Cards -->
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-4">
+                                <div class="summary-card medical-pattern">
+                                    <div class="summary-icon healthcare-pulse">
+                                        <i class="fas fa-microphone"></i>
+                                    </div>
+                                    <h3 id="audioCount">0</h3>
+                                    <p>Voice Recordings</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="summary-card medical-pattern">
+                                    <div class="summary-icon healthcare-pulse">
+                                        <i class="fas fa-prescription-bottle-alt"></i>
+                                    </div>
+                                    <h3 id="prescriptionCount">0</h3>
+                                    <p>Prescriptions</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="summary-card medical-pattern">
+                                    <div class="summary-icon healthcare-pulse">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <h3 id="approvedCount">0</h3>
+                                    <p>Approved Results</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Timeline Section -->
+    <section class="timeline-section section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="section-header text-center mb-5">
+                        <h2 class="display-5 fw-bold">
+                            <i class="fas fa-history me-3"></i>Your Health Timeline
+                        </h2>
+                        <p class="lead text-muted">
+                            <i class="fas fa-stethoscope me-2 stethoscope-float"></i>
+                            Track your medical journey with AI-powered insights
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-filters mb-4">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-primary active" onclick="filterResults('all')">
+                                All Results
+                            </button>
+                            <button type="button" class="btn btn-outline-primary" onclick="filterResults('audio')">
+                                Voice Recordings
+                            </button>
+                            <button type="button" class="btn btn-outline-primary" onclick="filterResults('prescription')">
+                                Prescriptions
+                            </button>
+                            <button type="button" class="btn btn-outline-primary" onclick="filterResults('approved')">
+                                Approved Only
+                            </button>
+                        </div>
+                        <button class="btn btn-success ms-3" onclick="loadResults()">
+                            <i class="fas fa-sync me-2"></i>Refresh
+                        </button>
+                    </div>
+                    
+                    <div class="results-timeline" id="resultsTimeline">
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-3 text-muted">Loading your results...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Export Section -->
+    <section class="export-section section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h3 class="mb-4">Export Your Health Data</h3>
+                    <p class="text-muted mb-4">Download your complete health records for your personal use or sharing with healthcare providers</p>
+                    <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+                        <button class="btn btn-primary btn-lg" onclick="exportResults('pdf')">
+                            <i class="fas fa-file-pdf me-2"></i>Export as PDF
+                        </button>
+                        <button class="btn btn-outline-primary btn-lg" onclick="exportResults('json')">
+                            <i class="fas fa-file-code me-2"></i>Export as JSON
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Result Details Modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-file-medical me-2"></i>Result Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="resultModalContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="downloadResultBtn">
+                        <i class="fas fa-download me-2"></i>Download
+                    </button>
+                    <button type="button" class="btn btn-info" id="shareResultBtn">
+                        <i class="fas fa-share me-2"></i>Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TTS Modal -->
+    <div class="modal fade" id="ttsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-volume-up me-2"></i>Audio Instructions
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="ttsContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
+    <script src="results.js"></script>
+</body>
+</html>

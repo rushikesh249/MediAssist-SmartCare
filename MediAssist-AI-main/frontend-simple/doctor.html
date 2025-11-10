@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Portal - MediAssist AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="doctor-body">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-doctor-gradient fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-stethoscope me-2 stethoscope-float"></i>MediAssist AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="patient.html">
+                            <i class="fas fa-user-injured me-1"></i>Patient Portal
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="doctor.html">
+                            <i class="fas fa-user-md me-1"></i>Doctor Portal
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics.html">
+                            <i class="fas fa-chart-bar me-1"></i>Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Doctor Hero Section -->
+    <section class="doctor-hero">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-12">
+                    <div class="doctor-dashboard">
+                        <div class="dashboard-header text-center mb-5">
+                            <div class="doctor-avatar healthcare-pulse">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <h1 class="display-4 fw-bold text-white mb-3">
+                                <i class="fas fa-stethoscope me-2 stethoscope-float"></i>
+                                Doctor Dashboard
+                            </h1>
+                            <p class="lead text-white-50">Manage patient submissions, review cases, and provide medical guidance</p>
+                        </div>
+                        
+                        <!-- Quick Stats -->
+                        <div class="row g-4 mb-5">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="stat-card medical-pattern">
+                                    <div class="stat-icon healthcare-pulse">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 id="totalPatients">0</h3>
+                                        <p>Total Patients</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="stat-card medical-pattern">
+                                    <div class="stat-icon healthcare-pulse">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 id="pendingReviews">0</h3>
+                                        <p>Pending Reviews</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="stat-card medical-pattern">
+                                    <div class="stat-icon healthcare-pulse">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 id="approvedCases">0</h3>
+                                        <p>Approved Cases</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="stat-card medical-pattern">
+                                    <div class="stat-icon healthcare-pulse">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 id="todayCases">0</h3>
+                                        <p>Today's Cases</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patient Submissions Section -->
+    <section class="submissions-section section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header d-flex justify-content-between align-items-center mb-5">
+                        <div>
+                            <h2 class="display-5 fw-bold">
+                                <i class="fas fa-clipboard-list me-3"></i>Patient Submissions
+                            </h2>
+                            <p class="lead text-muted">Review and manage patient cases</p>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <button class="btn btn-outline-primary" onclick="loadSubmissions()">
+                                <i class="fas fa-sync me-2"></i>Refresh
+                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-filter me-2"></i>Filter
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" onclick="filterSubmissions('all')">All Submissions</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="filterSubmissions('pending')">Pending Review</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="filterSubmissions('approved')">Approved</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="filterSubmissions('audio')">Audio Only</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="filterSubmissions('prescription')">Prescriptions Only</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="submissions-container">
+                        <div id="submissionsList">
+                            <div class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-3 text-muted">Loading patient submissions...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload New Prescription Section -->
+    <section class="upload-section section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-header text-center mb-5">
+                        <h2 class="display-5 fw-bold">
+                            <i class="fas fa-plus-circle me-3"></i>Upload New Prescription
+                        </h2>
+                        <p class="lead text-muted">Add new prescriptions to the system for processing</p>
+                    </div>
+                    
+                    <div class="doctor-upload-card">
+                        <form id="doctorPrescriptionForm" enctype="multipart/form-data">
+                            <div class="upload-area-doctor" id="doctorUploadArea">
+                                <div class="upload-icon">
+                                    <i class="fas fa-file-prescription"></i>
+                                </div>
+                                <h4>Upload Prescription Document</h4>
+                                <p class="text-muted mb-4">Drag & drop or click to select prescription images</p>
+                                <input type="file" id="doctorPrescriptionFile" accept="image/*" required multiple>
+                                <button type="button" class="btn btn-outline-success" onclick="document.getElementById('doctorPrescriptionFile').click()">
+                                    <i class="fas fa-folder-open me-2"></i>Select Files
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div id="doctorPrescriptionPreview" class="prescription-preview-grid"></div>
+                        
+                        <div class="upload-actions text-center" style="display: none;" id="doctorUploadActions">
+                            <button type="submit" form="doctorPrescriptionForm" class="btn btn-success btn-lg">
+                                <i class="fas fa-cloud-upload-alt me-2"></i>Process Prescriptions
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patient Details Modal -->
+    <div class="modal fade" id="patientModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-circle me-2"></i>Patient Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="patientModalContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="approvePatientBtn">
+                        <i class="fas fa-check me-2"></i>Approve Case
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-4">
+                    <div class="spinner-grow text-success" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="mt-3">Processing...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TTS Modal -->
+    <div class="modal fade" id="ttsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-volume-up me-2"></i>Audio Instructions
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="ttsContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
+    <script src="doctor.js"></script>
+    <script>
+        // Route protection for doctor portal
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!isAuthenticated()) {
+                alert('Please login to access the doctor portal');
+                window.location.href = 'index.html';
+            } else if (currentUser && currentUser.user_type !== 'doctor') {
+                alert('Only doctors can access the doctor portal');
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

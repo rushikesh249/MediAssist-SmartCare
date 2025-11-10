@@ -1,0 +1,6 @@
+tfenv
+__pycache__
+*.pyc
+*.sqlite
+uploads
+.DS_Store
