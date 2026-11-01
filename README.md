@@ -2,7 +2,7 @@
 
 A comprehensive AI-powered medical assistant system that helps patients and doctors manage medical information efficiently. The system features audio transcription, prescription processing, and intelligent medical data analysis.
 
-## 🌟 Features
+##  Features
 
 ### For Patients
 - **🎤 Voice-to-Text**: Record symptoms and get automatic transcription
