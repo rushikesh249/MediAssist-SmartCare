@@ -42,7 +42,7 @@ MedAssist AI/
     └── Text-to-Speech (TTS)
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Python 3.8+
