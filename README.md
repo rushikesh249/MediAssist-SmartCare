@@ -11,10 +11,10 @@ A comprehensive AI-powered medical assistant system that helps patients and doct
 - **🔊 Audio Instructions**: Text-to-speech for patient instructions
 
 ### For Doctors
-- **📋 Patient Management**: View and manage patient submissions
-- **✅ Approval System**: Review and approve patient submissions
-- **📊 Analytics Dashboard**: Comprehensive statistics and insights
-- **🔍 Advanced Search**: Filter and search patient data
+- ** Patient Management**: View and manage patient submissions
+- ** Approval System**: Review and approve patient submissions
+- ** Analytics Dashboard**: Comprehensive statistics and insights
+- ** Advanced Search**: Filter and search patient data
 
 ### AI-Powered Features
 - **🤖 OpenAI Integration**: GPT-4 powered symptom analysis
