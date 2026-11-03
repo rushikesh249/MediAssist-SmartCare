@@ -9,7 +9,7 @@ def preprocess_image(image_path):
     img = cv2.imread(image_path)
     
     # Check if image was loaded successfully
-    if img is None:
+    if img is None: 
         raise ValueError(f"Could not load image from path: {image_path}")
     
     # Convert to grayscale
