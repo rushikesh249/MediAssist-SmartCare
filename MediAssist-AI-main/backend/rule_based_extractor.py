@@ -32,7 +32,7 @@ def extract_medication_info(text):
                 'instructions': instructions.strip()
             })
     
-    return extracted_info
+     return extracted_info
 
 def format_patient_instructions(extracted_info):
     instructions = []
