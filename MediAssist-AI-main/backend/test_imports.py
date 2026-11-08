@@ -17,7 +17,7 @@ except ImportError as e:
     print("Solution: CORS is included with FastAPI, install FastAPI first")
 
 try:
-    import uvicorn
+    import unicorn
     print(f"✓ Uvicorn imported successfully")
 except ImportError as e:
     print(f"✗ Uvicorn import failed: {e}")
