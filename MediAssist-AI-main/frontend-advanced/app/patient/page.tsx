@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Mic, MicOff, Upload, Play, CheckCircle, Volume2 } from "lucide-react"
 import { useSpeechToText } from "@/hooks/use-speech-to-text"
-import { useApi } from "@/hooks/use-api"
+import { useApi} from "@/hooks/use-api"
 
 export default function PatientPage() {
   const [showResults, setShowResults] = useState(false)
